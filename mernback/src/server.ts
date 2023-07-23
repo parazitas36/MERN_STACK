@@ -16,7 +16,7 @@ const startServer = () => {
 };
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING as string)
-  .then((x) => {
+  .then(() => {
     console.log('Connected to the database...');
     startServer();
   })
