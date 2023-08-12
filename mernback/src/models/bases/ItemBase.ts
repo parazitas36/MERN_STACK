@@ -1,8 +1,7 @@
 import { ItemCategory } from '../../enums/ItemCategory';
-import { IItemDetails } from '../../models/ItemDetails';
+import { IItemDetails } from '../ItemDetails';
 
-export interface IItemGetDto {
-  id: string;
+export interface ItemBase {
   amount: number;
   category: ItemCategory;
   description: string;

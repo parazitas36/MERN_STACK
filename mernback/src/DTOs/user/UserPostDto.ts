@@ -1,13 +1,9 @@
 import { Role } from '../../enums/Role';
+import { UserBase } from '../../models/bases/UserBase';
 import { DtoValidator } from '../../utils/general/DtoValidator';
 
-export interface IUserPostDto {
-  email: string;
-  name: string;
-  password: string;
+export interface IUserPostDto extends UserBase {
   repeatPassword: string;
-  role: Role;
-  surname: string;
 }
 
 export interface UserPostDto extends IUserPostDto {}

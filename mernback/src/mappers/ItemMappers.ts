@@ -8,5 +8,6 @@ export function MapToIItem(dto: ItemPostDto): IItem {
     description: dto.description,
     details: dto.details,
     name: dto.name,
+    price: dto.price,
   } as IItem;
 }

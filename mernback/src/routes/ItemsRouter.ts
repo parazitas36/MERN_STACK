@@ -7,6 +7,7 @@ const router = Router();
 router.get(ItemEndpoints.Base, GetAllItems);
 router.get(ItemEndpoints.Category, GetAllItemsByCategory);
 router.get(ItemEndpoints.ById, GetItemById);
+
 router.post(ItemEndpoints.Base, PostItem);
 
 export const ItemsRouter = router;

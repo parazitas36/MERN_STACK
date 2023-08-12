@@ -1,14 +1,8 @@
 import { Document, Schema, model } from 'mongoose';
-import { ItemCategory } from '../enums/ItemCategory';
-import { IItemDetails, ItemDetailsSchema } from './ItemDetails';
+import { ItemDetailsSchema } from './ItemDetails';
+import { ItemBase } from './bases/ItemBase';
 
-export interface IItem extends Document {
-  amount: number;
-  category: ItemCategory;
-  description: string;
-  details?: [IItemDetails];
-  name: string;
-}
+export interface IItem extends Document, ItemBase {}
 
 const itemSchema = new Schema<IItem>({
   amount: { type: Number, required: true },
@@ -16,6 +10,7 @@ const itemSchema = new Schema<IItem>({
   description: { type: String, required: true },
   details: { type: [ItemDetailsSchema], required: false },
   name: { type: String, required: true },
+  price: { type: Number, required: true },
 });
 
 export const Item = model<IItem>('Item', itemSchema);

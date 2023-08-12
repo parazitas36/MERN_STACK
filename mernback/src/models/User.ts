@@ -3,15 +3,9 @@ import {
     Schema,
     model,
 } from 'mongoose'
-import { Role } from '../enums/Role';
+import { UserBase } from './bases/UserBase';
 
-export interface IUser extends Document {
-    email: string,
-    name: string,
-    password: string,
-    role: Role
-    surname: string,
-}
+export interface IUser extends Document, UserBase {}
 
 const userSchema = new Schema<IUser>({
     email: { type: String, required: true },

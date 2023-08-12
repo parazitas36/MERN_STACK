@@ -1,6 +1,6 @@
 export enum ItemCategory {
-    Books,
-    Clothes,
-    Electronics,
-    Furniture,
+  Books,
+  Clothes,
+  Electronics,
+  Furniture,
 }

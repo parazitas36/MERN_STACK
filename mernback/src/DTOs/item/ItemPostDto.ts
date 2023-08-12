@@ -8,6 +8,7 @@ export interface IItemPostDto {
   description: string;
   details?: [IItemDetails];
   name: string;
+  price: number;
 }
 
 export interface ItemPostDto extends IItemPostDto {}
@@ -22,7 +23,10 @@ export class ItemPostDto extends DtoValidator {
 
   protected isValid(): boolean {
     return (
-      this.name?.trim()?.length > 0 && this.description?.trim()?.length > 0 && this.amount >= 0,
+      this.name?.trim()?.length > 0 &&
+      this.description?.trim()?.length > 0 &&
+      this.amount >= 0 &&
+      this.price > 0 &&
       Object.values(ItemCategory).includes(this.category)
     );
   }
