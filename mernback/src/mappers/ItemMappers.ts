@@ -1,3 +1,4 @@
+import { IItemShortGetDto } from './../DTOs/item/ItemShortGetDto';
 import { ItemPostDto } from '../DTOs/item/ItemPostDto';
 import { IItem } from '../models/Item';
 
@@ -10,4 +11,12 @@ export function MapToIItem(dto: ItemPostDto): IItem {
     name: dto.name,
     price: dto.price,
   } as IItem;
+}
+
+export function MapToIItemShortGetDto(item: IItem): IItemShortGetDto {
+  return {
+    id: item.id,
+    name: item.name,
+    price: item.price,
+  }
 }

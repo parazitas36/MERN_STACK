@@ -6,7 +6,7 @@ export interface IItemGetDto {
   amount: number;
   category: ItemCategory;
   description: string;
-  details?: [IItemDetails];
+  details?: IItemDetails[];
   name: string;
   price: number;
 }

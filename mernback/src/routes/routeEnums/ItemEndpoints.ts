@@ -1,5 +1,5 @@
 export enum ItemEndpoints {
-    Base = '/',
-    Category = '/category/:category',
-    ById = '/:id'
+  Base = '/',
+  Category = '/category/:category',
+  ById = '/:id',
 }

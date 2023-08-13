@@ -1,4 +1,4 @@
 export enum UserEndpoints {
-    Register = `/register`,
-    Login = `/login`,
+  Register = `/register`,
+  Login = `/login`,
 }

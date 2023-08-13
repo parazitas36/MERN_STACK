@@ -1,15 +1,8 @@
 import { ItemCategory } from '../../enums/ItemCategory';
-import { IItemDetails } from '../../models/ItemDetails';
+import { ItemBase } from '../../models/bases/ItemBase';
 import { DtoValidator } from '../../utils/general/DtoValidator';
 
-export interface IItemPostDto {
-  amount: number;
-  category: ItemCategory;
-  description: string;
-  details?: [IItemDetails];
-  name: string;
-  price: number;
-}
+export interface IItemPostDto extends ItemBase {}
 
 export interface ItemPostDto extends IItemPostDto {}
 

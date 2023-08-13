@@ -7,6 +7,7 @@ export interface ICart extends Document, CartBase {}
 
 const cartSchema = new Schema<ICart>({
   items: { type: [CartItemSchema], required: true },
+  isOrdered: {type: Boolean, required: true, default: false },
   user: { type: Schema.Types.ObjectId, ref: User.modelName, required: true },
 });
 

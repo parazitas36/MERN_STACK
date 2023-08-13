@@ -5,7 +5,7 @@ export interface ItemBase {
   amount: number;
   category: ItemCategory;
   description: string;
-  details?: [IItemDetails];
+  details?: IItemDetails[];
   name: string;
   price: number;
 }

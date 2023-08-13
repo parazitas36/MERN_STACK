@@ -1,4 +1,5 @@
 export enum EntitiesEndpoints {
-    Users = '/users',
-    Items = '/items'
+  Carts = '/carts',
+  Items = '/items',
+  Users = '/users',
 }
