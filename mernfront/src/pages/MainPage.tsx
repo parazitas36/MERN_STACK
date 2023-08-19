@@ -1,6 +1,5 @@
 import React from 'react';
-import NavigationBar from '../components/NavigationBar';
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import Product from '../components/Product';
 
 const MainPage: React.FC = () => {

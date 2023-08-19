@@ -2,7 +2,7 @@ import React from 'react';
 
 import GuestRoutes from './routes/GuestRoutes';
 import NavigationBar from './components/NavigationBar';
-import { Paper, Container } from '@mui/material';
+import { Paper } from '@mui/material';
 
 export const App: React.FC = () => {
 	// const cartState = useAppSelector((state) => state.cartState);
