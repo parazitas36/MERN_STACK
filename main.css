@@ -1,8 +1,17 @@
+html {
+  display: flex;
+  flex-direction: column; 
+  margin: 0;
+  padding: 0;
+  align-items: 'center';
+}
+
 body {
   display: flex;
   flex-direction: column; 
   margin: 0;
   padding: 0;
+  align-items: 'center';
 }
 /* roboto-cyrillic-ext-300-normal */
 @font-face {
