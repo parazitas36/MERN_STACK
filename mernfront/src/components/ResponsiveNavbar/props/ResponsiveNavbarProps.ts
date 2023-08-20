@@ -1,7 +1,7 @@
 import { NavItem } from "../../../data/types/NavItem";
 
 export interface ResponsiveNavbarProps {
-	links?: NavItem[];
-	isInSmallScreen?: boolean | false;
+	items?: NavItem[];
+	isInSmallScreen?: boolean;
 	isMenuToggled?: boolean | false;
 }

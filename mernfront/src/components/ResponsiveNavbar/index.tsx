@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import NavigationLogo from '../NavigationLogo';
 import { ResponsiveNavbarProps } from './props/ResponsiveNavbarProps';
-import ResponsiveNavbarLinks from './ResponsiveNavbarLinks';
+import ResponsiveNavbarItems from './ResponsiveNavbarItems';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Grid, IconButton, Stack } from '@mui/material';
 
@@ -34,8 +34,8 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = (props: ResponsiveNavb
 				</Stack>
 			</Grid>
 			<Grid item sx={{alignSelf: 'center'}}>
-				<ResponsiveNavbarLinks
-					links={props.links}
+				<ResponsiveNavbarItems
+					items={props.items}
 					isInSmallScreen={isInSmallScreen}
 					isMenuToggled={isMenuToggled}
 				/>

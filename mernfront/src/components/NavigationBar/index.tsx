@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { AppBar, Container, Toolbar } from '@mui/material';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+
 import ResponsiveNavbar from '../ResponsiveNavbar';
 import { NavItem } from '../../data/types/NavItem';
 
@@ -9,6 +11,7 @@ const NavigationBar: React.FC = () => {
 	const links: NavItem[] = [
 		{
 			label: 'Label 1',
+			icon: <>{<ShoppingBasketIcon />}</>,
     		route: '/label1',
 		},
 		{
@@ -24,7 +27,7 @@ const NavigationBar: React.FC = () => {
 		<AppBar component="nav" position="sticky">
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<ResponsiveNavbar links={links} />
+					<ResponsiveNavbar items={links} />
 				</Toolbar>
 			</Container>
 		</AppBar>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { ResponsiveNavbarProps } from './props/ResponsiveNavbarProps';
-import ResponsiveNavbarLinkItem from './ResponsiveNavbarLinkItem';
+import ResponsiveNavbarItem from './ResponsiveNavbarItem';
 import { Stack } from '@mui/material';
 
-const ResponsiveNavbarLinks = (props: ResponsiveNavbarProps) => {
+const ResponsiveNavbarItems = (props: ResponsiveNavbarProps) => {
     const shouldHide = (): boolean => {
         if (props.isInSmallScreen !== true) {
             return false;
@@ -17,11 +17,11 @@ const ResponsiveNavbarLinks = (props: ResponsiveNavbarProps) => {
 			direction={props.isInSmallScreen === true ? 'column' : 'row'}
             sx={{ display: shouldHide() ? 'none' : 'flex'}}
 		>
-			{props?.links?.map((linkItem) => (
-				<ResponsiveNavbarLinkItem data={linkItem} />
+			{props?.items?.map((item) => (
+				<ResponsiveNavbarItem data={item} isInSmallScreen={props.isInSmallScreen || false} />
 			))}
 		</Stack>
 	);
 };
 
-export default ResponsiveNavbarLinks;
+export default ResponsiveNavbarItems;
