@@ -19,11 +19,12 @@ export const App: React.FC = () => {
 	// }
 
 	return (
-		<React.Fragment>
-			<Paper elevation={1} sx={{minWidth: '350px'}}>
+		<Paper
+			elevation={1}
+			sx={{ minWidth: 410, alignItems: 'center' }}
+		>
 			<NavigationBar />
-				<GuestRoutes />
-			</Paper>
-		</React.Fragment>
+			<GuestRoutes />
+		</Paper>
 	);
 };
