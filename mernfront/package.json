@@ -2,8 +2,11 @@
   "name": "mernfront",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://parazitas36.github.io",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "webpack serve --port 3000",
     "build": "NODE_ENV=production webpack"
   },
@@ -37,6 +40,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-redux": "^7.1.25",
     "core-js": "^3.31.1",
+    "gh-pages": "^6.0.0",
     "raf": "^3.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
