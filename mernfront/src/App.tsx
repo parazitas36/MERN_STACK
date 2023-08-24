@@ -21,7 +21,7 @@ export const App: React.FC = () => {
 	return (
 		<Paper
 			elevation={1}
-			sx={{ minWidth: 410, alignItems: 'center' }}
+			sx={{ width: '100%', alignItems: 'center' }}
 		>
 			<NavigationBar />
 			<GuestRoutes />

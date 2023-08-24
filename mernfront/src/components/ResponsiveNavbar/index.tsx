@@ -29,7 +29,7 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = (props: ResponsiveNavb
 						sx={{ display: isInSmallScreen ? 'flex' : 'none' }}
 						onClick={toggleMenu}
 					>
-						<MenuIcon sx={{ color: 'white', fontSize: 40 }} />
+						<MenuIcon sx={{ color: 'white', fontSize: { xs: 30, sm: 35 } }} />
 					</IconButton>
 				</Stack>
 			</Grid>

@@ -21,11 +21,12 @@ const NavigationLogo: React.FC = () => {
 						letterSpacing: '.3rem',
 						color: 'white',
 						textDecoration: 'none',
+						fontSize: { xs: 25, sm: 30 }
 					}}
 				>
 					MERN E-SHOP
 				</Typography>
-				<ShoppingCartIcon sx={{ fontSize: 30, ml: '.3em', color: 'white', }} />
+				<ShoppingCartIcon sx={{ fontSize: { xs: 25, sm: 30 }, ml: '.3em', color: 'white', }} />
 			</IconButton>
 		</Box>
 	);
