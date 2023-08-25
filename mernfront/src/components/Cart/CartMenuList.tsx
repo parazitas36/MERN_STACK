@@ -1,24 +1,54 @@
-import { Divider, List, ListItem, Typography } from '@mui/material';
+import { Box, Container, Divider, List, ListItem, Paper, Typography } from '@mui/material';
 import React from 'react';
 import CartMenuItem from './CartMenuItem';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const CartMenuList = () => {
-	const test = [1, 2, 3, 4, 5, 6];
+	const cartState = useAppSelector((state) => state.cartState);
+	const cartItems = cartState.cart;
+
+	if (cartItems.length > 0) {
+		return (
+			<List sx={{ bgcolor: 'background.paper', maxWidth: 400 }}>
+				<Box sx={{ maxHeight: 450, overflowY: 'scroll' }}>
+					{cartItems.map((item, i) => (
+						<>
+							<CartMenuItem item={item} />
+							<Divider
+								variant="fullWidth"
+								component="li"
+							/>
+						</>
+					))}
+				</Box>
+				<ListItem sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+					<Typography variant="h5">Total: 112.23$</Typography>
+				</ListItem>
+			</List>
+		);
+	}
+
 	return (
-		<List sx={{ bgcolor: 'background.paper', maxWidth: 400 }}>
-			{test.map((x, i) => (
-				<>
-					<CartMenuItem />
-					<Divider
-						variant="fullWidth"
-						component="li"
-					/>
-				</>
-			))}
-			<ListItem sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-				<Typography variant="h5">Total: 112.23$</Typography>
-			</ListItem>
-		</List>
+		<Container
+			sx={{
+				display: 'flex',
+				flexDirection: 'column',
+				bgcolor: 'background.paper',
+				width: 275,
+				height: 310,
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}
+		>
+			<ShoppingCartIcon sx={{ fontSize: 40, color: 'grey.700' }} />
+			<Typography
+				my={2}
+				sx={{ fontSize: 20 }}
+			>
+				Your cart is empty
+			</Typography>
+		</Container>
 	);
 };
 

@@ -11,50 +11,35 @@ const initialState: CartState = {
 export const CartReducer = createReducer(initialState, (builder) => {
 	builder
 		.addCase(LoadCart, (state, action) => {
-			state = LoadFetchedCart(state, action);
+			LoadFetchedCart(state, action);
 		})
 		.addCase(InsertItemToCart, (state, action) => {
-			state = AddItemToCart(state, action);
+			AddItemToCart(state, action);
 		})
 		.addCase(DropItemFromCart, (state, action) => {
-			state = RemoveItemFromCart(state, action);
+			RemoveItemFromCart(state, action);
 		})
 		.addCase(ClearCart, (state, action) => {
-			state = InitializeNewCart(state, action);
+			InitializeNewCart(state, action);
 		});
 });
 
-function LoadFetchedCart(state: CartState, action: Action<ICartItemGetDto[]>): CartState {
-	return { ...state, cart: action.payload || [] };
+function LoadFetchedCart(state: CartState, action: Action<ICartItemGetDto[]>): void {
+	state.cart = action.payload || [];
 }
 
-function AddItemToCart(state: CartState, action: Action<ICartItemGetDto>): CartState {
-	return {
-		...state,
-		cart: AddItem(state.cart, action.payload),
-	};
+function AddItemToCart(state: CartState, action: Action<ICartItemGetDto>): void {
+	if (action.payload !== undefined) {
+		state.cart.push(action.payload);
+	}
 }
 
-function RemoveItemFromCart(state: CartState, action: Action<ICartItemGetDto>): CartState {
-	return {
-		...state,
-		cart: RemoveItem(state.cart, action.payload),
-	};
+function RemoveItemFromCart(state: CartState, action: Action<ICartItemGetDto>): void {
+	if (action.payload !== undefined) {
+		state.cart = state.cart.filter((item) => item.id !== action.payload?.id);
+	}
 }
 
-function InitializeNewCart(state: CartState, action: Action<undefined>): CartState {
-	return {
-		...state,
-		cart: [],
-	};
-}
-
-function AddItem(cart: ICartItemGetDto[], itemToAdd: ICartItemGetDto | undefined): ICartItemGetDto[] {
-	if (itemToAdd === undefined) return cart;
-	cart.push(itemToAdd);
-	return cart;
-}
-
-function RemoveItem(cart: ICartItemGetDto[], itemToRemove: ICartItemGetDto | undefined): ICartItemGetDto[] {
-	return itemToRemove === undefined ? cart : cart.filter((item) => item.id === itemToRemove.id);
+function InitializeNewCart(state: CartState, action: Action<undefined>): void {
+	state.cart = [];
 }

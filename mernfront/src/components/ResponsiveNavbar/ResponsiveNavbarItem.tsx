@@ -12,9 +12,14 @@ interface Props {
 const ResponsiveNavbarItem: React.FC<Props> = (props: Props) => {
 	const navigate = useNavigate();
 
+	const shouldComponentOverrideOnClickOnBigScreen = (): boolean =>
+		props.isInSmallScreen !== true && props.data.shouldComponentDisableRoute === true;
+
 	const onClick = (): void => {
-		navigate(props.data.route)
-	}
+		if (!shouldComponentOverrideOnClickOnBigScreen()) {
+			navigate(props.data.route);
+		}
+	};
 
 	if (props.isInSmallScreen) {
 		return (
@@ -23,12 +28,15 @@ const ResponsiveNavbarItem: React.FC<Props> = (props: Props) => {
 				sx={{ color: 'white' }}
 				onClick={onClick}
 			>
-			<Stack spacing={1} direction='row'>
-				<div>{props.data.icon}</div>
-				<div>{props.data.label}</div>
-			</Stack>
+				<Stack
+					spacing={1}
+					direction="row"
+				>
+					<div>{props.data.icon}</div>
+					<div>{props.data.label}</div>
+				</Stack>
 			</Button>
-		)
+		);
 	}
 
 	return (
@@ -37,11 +45,13 @@ const ResponsiveNavbarItem: React.FC<Props> = (props: Props) => {
 			sx={{ color: 'white' }}
 			onClick={onClick}
 		>
-			{props.data.component !== undefined 
-                ? <>{props.data.component}</>
-                : props.data.icon === undefined 
-					? <>{props.data.label}</>
-					: <NavbarIcon data={props.data} /> }
+			{props.data.component !== undefined ? (
+				<>{props.data.component}</>
+			) : props.data.icon === undefined ? (
+				<>{props.data.label}</>
+			) : (
+				<NavbarIcon data={props.data} />
+			)}
 		</Button>
 	);
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import { IconButton, Popper } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { IconButton, Popper, Tooltip } from '@mui/material';
 import CartMenuList from './CartMenuList';
 
 const CartMenuButton = () => {
@@ -14,12 +14,14 @@ const CartMenuButton = () => {
 
 	return (
 		<>
-			<IconButton
-				aria-describedby={id}
-				onClick={handleClick}
-			>
-				<ShoppingBasketIcon />
-			</IconButton>
+			<Tooltip title="Cart">
+				<IconButton
+					aria-describedby={id}
+					onClick={handleClick}
+				>
+					<ShoppingCartIcon sx={{ fontSize: 30, color: 'primary.contrastText' }}  />
+				</IconButton>
+			</Tooltip>
 			<Popper
 				open={Boolean(anchorEl)}
 				id={id}

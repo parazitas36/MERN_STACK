@@ -10,8 +10,21 @@ import {
 	Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ICartItemGetDto } from '../../data/DTOs/cart/CartItemGetDto';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { DropItemFromCart } from '../../redux/actions/CartActions';
 
-const CartMenuItem = () => {
+interface Props {
+	item: ICartItemGetDto;
+}
+
+const CartMenuItem = (props: Props) => {
+	const dispatch = useAppDispatch();
+
+	const Remove = () => {
+		dispatch(DropItemFromCart(props.item));
+	};
+
 	return (
 		<ListItem
 			alignItems="flex-start"
@@ -25,7 +38,7 @@ const CartMenuItem = () => {
 			</ListItemAvatar>
 			<ListItemText
 				sx={{ flexGrow: 1 }}
-				primary="Item name"
+				primary={props.item.name}
 				secondary={
 					<Typography
 						sx={{ display: 'inline' }}
@@ -33,12 +46,12 @@ const CartMenuItem = () => {
 						variant="body2"
 						color="text.primary"
 					>
-						Price: 10.99$
+						{`${props.item.price}$`}
 					</Typography>
 				}
 			/>
 			<ListItemSecondaryAction>
-				<IconButton>
+				<IconButton onClick={Remove}>
 					<DeleteIcon
 						color="error"
 						sx={{ fontSize: 24 }}
