@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { IconButton, Popper, Tooltip } from '@mui/material';
+import { Badge, IconButton, Popper, Tooltip } from '@mui/material';
 import CartMenuList from './CartMenuList';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const CartMenuButton = () => {
+	const cart = useAppSelector(states => states.cartState.cart);
+
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -19,7 +22,9 @@ const CartMenuButton = () => {
 					aria-describedby={id}
 					onClick={handleClick}
 				>
-					<ShoppingCartIcon sx={{ fontSize: 30, color: 'primary.contrastText' }}  />
+					<Badge badgeContent={cart.length || 0} showZero color="secondary">
+						<ShoppingCartIcon sx={{ fontSize: 30, color: 'primary.contrastText' }}  />
+  					</Badge>
 				</IconButton>
 			</Tooltip>
 			<Popper
