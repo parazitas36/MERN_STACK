@@ -11,7 +11,7 @@ const CartMenuList = () => {
 	if (cartItems.length > 0) {
 		return (
 			<List sx={{ bgcolor: 'background.paper', maxWidth: 400 }}>
-				<Box sx={{ maxHeight: 450, overflowY: 'scroll' }}>
+				<Box sx={{ maxHeight: 450, overflowY: 'scroll', backgroundColor: 'inherit' }}>
 					{cartItems.map((item, i) => (
 						<>
 							<CartMenuItem item={item} />
@@ -23,7 +23,7 @@ const CartMenuList = () => {
 					))}
 				</Box>
 				<ListItem sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Typography variant="h5">Total: 112.23$</Typography>
+					<Typography variant="h5">{`Total: ${cartItems.reduce((sum, currentVal) => sum + currentVal.price, 0).toFixed(2)}$`}</Typography>
 				</ListItem>
 			</List>
 		);

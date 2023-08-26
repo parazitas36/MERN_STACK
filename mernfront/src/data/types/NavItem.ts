@@ -5,5 +5,4 @@ export interface NavItem {
     route: To,
     icon?: React.ReactNode,
     component?: React.FC | React.ReactNode,
-    shouldComponentDisableRoute?: boolean,
 }

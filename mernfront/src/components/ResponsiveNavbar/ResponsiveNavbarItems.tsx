@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { ResponsiveNavbarProps } from './props/ResponsiveNavbarProps';
 import ResponsiveNavbarItem from './ResponsiveNavbarItem';
 import { Stack } from '@mui/material';
@@ -18,7 +18,7 @@ const ResponsiveNavbarItems = (props: ResponsiveNavbarProps) => {
             sx={{ display: shouldHide() ? 'none' : 'flex'}}
 		>
 			{props?.items?.map((item) => (
-				<ResponsiveNavbarItem data={item} isInSmallScreen={props.isInSmallScreen || false} />
+				<ResponsiveNavbarItem key={useId()} data={item} isInSmallScreen={props.isInSmallScreen || false} />
 			))}
 		</Stack>
 	);

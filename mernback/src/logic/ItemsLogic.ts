@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { IItemPostDto, ItemPostDto } from '../DTOs/item/ItemPostDto';
 import { IItem, Item } from '../models/Item';
-import { MapToIItem } from '../mappers/ItemMappers';
+import { MapToIItem, MapToIItemShortGetDtoArray } from '../mappers/ItemMappers';
 import { StatusCodes } from '../enums/StatusCodes';
 
 export async function GetAllItems(req: Request, res: Response): Promise<void> {
   const items = await Item.find({});
-  res.status(StatusCodes.OK).send(items);
+  res.status(StatusCodes.OK).send(MapToIItemShortGetDtoArray(items));
 }
 
 export async function GetAllItemsByCategory(req: Request, res: Response): Promise<void> {

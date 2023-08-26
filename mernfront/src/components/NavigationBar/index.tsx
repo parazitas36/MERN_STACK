@@ -12,7 +12,6 @@ const NavigationBar: React.FC = () => {
 			label: 'Label 1',
 			component: <CartMenuComponent />,
 			route: '/label1',
-			shouldComponentDisableRoute: true,
 		},
 		{
 			label: 'Label 2',

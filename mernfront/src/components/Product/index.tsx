@@ -7,17 +7,15 @@ import { IItemShortGetDto } from '../../data/DTOs/item/ItemShortGetDto';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { InsertItemToCart } from '../../redux/actions/CartActions';
 
-const Product: React.FC = () => {
+interface Props {
+	data: IItemShortGetDto
+}
+
+const Product: React.FC<Props> = (props: Props) => {
 	const dispatch = useAppDispatch();
 
-	const data: IItemShortGetDto = {
-		id: "id",
-		name: "Title",
-		price: 39.99,
-	};
-
 	const AddToCart = () => {
-	  dispatch(InsertItemToCart({...data, amount: 1}))
+	  dispatch(InsertItemToCart({...props.data, amount: 1}))
 	}
 
 	return (
@@ -32,8 +30,8 @@ const Product: React.FC = () => {
 			<Box sx={{ display: 'flex', justifyContent: 'center', minWidth: 300, background: 'transparent' }}>
 				<Card sx={{ margin: 2, overflow: 'hidden', boxShadow: 3, borderRadius: 2 }}>
 					<CardHeader
-						title={`${data.price}$`}
-						subheader={data.name}
+						title={`${props.data.price}$`}
+						subheader={props.data.name}
 					/>
 					<CardMedia
 						component="img"

@@ -20,3 +20,7 @@ export function MapToIItemShortGetDto(item: IItem): IItemShortGetDto {
     price: item.price,
   }
 }
+
+export function MapToIItemShortGetDtoArray(items: IItem[]): IItemShortGetDto[] {
+  return items.map(item => MapToIItemShortGetDto(item));
+}

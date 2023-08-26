@@ -12,13 +12,8 @@ interface Props {
 const ResponsiveNavbarItem: React.FC<Props> = (props: Props) => {
 	const navigate = useNavigate();
 
-	const shouldComponentOverrideOnClickOnBigScreen = (): boolean =>
-		props.isInSmallScreen !== true && props.data.shouldComponentDisableRoute === true;
-
 	const onClick = (): void => {
-		if (!shouldComponentOverrideOnClickOnBigScreen()) {
-			navigate(props.data.route);
-		}
+		navigate(props.data.route);
 	};
 
 	if (props.isInSmallScreen) {
@@ -37,6 +32,8 @@ const ResponsiveNavbarItem: React.FC<Props> = (props: Props) => {
 				</Stack>
 			</Button>
 		);
+	} else if (props.data.component !== undefined) {
+		return <>{props.data.component}</>
 	}
 
 	return (
@@ -45,9 +42,7 @@ const ResponsiveNavbarItem: React.FC<Props> = (props: Props) => {
 			sx={{ color: 'white' }}
 			onClick={onClick}
 		>
-			{props.data.component !== undefined ? (
-				<>{props.data.component}</>
-			) : props.data.icon === undefined ? (
+			{props.data.icon === undefined ? (
 				<>{props.data.label}</>
 			) : (
 				<NavbarIcon data={props.data} />

@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useEffect, useId, useState} from 'react';
 import { Container, Grid } from '@mui/material';
 import Product from '../components/Product';
+import { IItemShortGetDto } from '../data/DTOs/item/ItemShortGetDto';
 
 const MainPage: React.FC = () => {
-	const arr = [1, 2, 3, 4, 5, 6, 7, 8, 10];
+	const [products, setProducts] = useState<IItemShortGetDto[]>([]);
+
+	useEffect(() => {
+		(async() => {
+			const resp = await fetch('http://localhost:8080/items');
+			const items: IItemShortGetDto[] = await resp.json();
+			setProducts(items)
+		})()
+		
+	}, [])
+	
+
 	return (
 		<Container
 			maxWidth={false}
@@ -13,8 +25,8 @@ const MainPage: React.FC = () => {
 				spacing={2}
 				container
 			>
-				{arr.map((x) => (
-					<Product />
+				{products.map((product, i) => (
+					<Product key={i} data={product} />
 				))}
 			</Grid>
 		</Container>

@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import { UsersRouter } from './routes/UsersRouter';
 import { EntitiesEndpoints } from './routes/routeEnums/EntitiesEndpoints';
@@ -18,6 +19,13 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING as string)
   })
   .catch((err) => console.log(err));
 
+const allowedOrigins = ['http://localhost:3000', 'localhost:3000'];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+
+app.use(cors(options));
 app.use(express.json());
 
 app.use(EntitiesEndpoints.Users, UsersRouter);

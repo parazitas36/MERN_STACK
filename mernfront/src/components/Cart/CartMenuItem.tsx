@@ -37,7 +37,7 @@ const CartMenuItem = (props: Props) => {
 				/>
 			</ListItemAvatar>
 			<ListItemText
-				sx={{ flexGrow: 1 }}
+				sx={{ flexGrow: 1, paddingRight: 2 }}
 				primary={props.item.name}
 				secondary={
 					<Typography
