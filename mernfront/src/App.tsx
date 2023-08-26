@@ -2,7 +2,8 @@ import React from 'react';
 
 import GuestRoutes from './routes/GuestRoutes';
 import NavigationBar from './components/NavigationBar';
-import { Paper } from '@mui/material';
+import { Box, Container, Paper } from '@mui/material';
+import Footer from './components/Footer';
 
 export const App: React.FC = () => {
 	// const cartState = useAppSelector((state) => state.cartState);
@@ -19,12 +20,12 @@ export const App: React.FC = () => {
 	// }
 
 	return (
-		<Paper
-			elevation={1}
-			sx={{ width: '100%', alignItems: 'center' }}
-		>
+		<Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh'}}>
 			<NavigationBar />
-			<GuestRoutes />
-		</Paper>
+			<Paper sx={{ width: '100%', flexGrow: 1, overflowY: 'scroll'}}>
+				<GuestRoutes />
+			</Paper>
+			<Footer />
+		</Box>
 	);
 };
