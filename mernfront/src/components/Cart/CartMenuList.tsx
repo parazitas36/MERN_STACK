@@ -1,5 +1,5 @@
 import { Box, Container, Divider, List, ListItem, Paper, Typography } from '@mui/material';
-import React from 'react';
+import React, { useMemo } from 'react';
 import CartMenuItem from './CartMenuItem';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -7,6 +7,10 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 const CartMenuList = () => {
 	const cartState = useAppSelector((state) => state.cartState);
 	const cartItems = cartState.cart;
+
+	const SumMemo = useMemo(() => {
+		return cartItems.reduce((sum, item) => sum + item.price * item.amount, 0).toFixed(2);
+	}, [cartItems]);
 
 	if (cartItems.length > 0) {
 		return (
@@ -23,7 +27,7 @@ const CartMenuList = () => {
 					))}
 				</Box>
 				<ListItem sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Typography variant="h5">{`Total: ${cartItems.reduce((sum, currentVal) => sum + currentVal.price, 0).toFixed(2)}$`}</Typography>
+					<Typography variant="h5">{`Total: ${SumMemo}$`}</Typography>
 				</ListItem>
 			</List>
 		);

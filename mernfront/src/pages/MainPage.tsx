@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { CircularProgress, Container, Grid } from '@mui/material';
 import Product from '../components/Product';
 import { IItemShortGetDto } from '../data/DTOs/item/ItemShortGetDto';
 import { useFetch } from '../hooks/useFetch';
+import Notifications from '../components/Notifications';
 
 const MainPage: React.FC = () => {
 	const { data, error, statusCode, isLoading } = useFetch<IItemShortGetDto[]>({
@@ -11,8 +12,8 @@ const MainPage: React.FC = () => {
 
 	if (isLoading) {
 		return (
-			<Container sx={{display: 'flex', justifyContent: 'center'}}>
-				<CircularProgress sx={{marginY: 5}} />
+			<Container sx={{ display: 'flex', justifyContent: 'center' }}>
+				<CircularProgress sx={{ marginY: 5 }} />
 			</Container>
 		);
 	}
@@ -33,6 +34,7 @@ const MainPage: React.FC = () => {
 					/>
 				))}
 			</Grid>
+			<Notifications />
 		</Container>
 	);
 };

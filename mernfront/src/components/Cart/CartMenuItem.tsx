@@ -46,7 +46,7 @@ const CartMenuItem = (props: Props) => {
 						variant="body2"
 						color="text.primary"
 					>
-						{`${props.item.price}$`}
+						{`${props.item.price}$ x ${props.item.amount}`}
 					</Typography>
 				}
 			/>

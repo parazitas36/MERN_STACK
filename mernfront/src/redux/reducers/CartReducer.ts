@@ -4,6 +4,8 @@ import { Action } from '../types/Action';
 import { CartState } from '../types/CartState';
 import { createReducer } from '@reduxjs/toolkit';
 
+const INDEX_OF_NOT_FOUND = -1;
+
 const initialState: CartState = {
 	cart: [],
 };
@@ -14,7 +16,7 @@ export const CartReducer = createReducer(initialState, (builder) => {
 			LoadFetchedCart(state, action);
 		})
 		.addCase(InsertItemToCart, (state, action) => {
-			AddItemToCart(state, action);
+			TryAddItemToCart(state, action);
 		})
 		.addCase(DropItemFromCart, (state, action) => {
 			RemoveItemFromCart(state, action);
@@ -28,9 +30,9 @@ function LoadFetchedCart(state: CartState, action: Action<ICartItemGetDto[]>): v
 	state.cart = action.payload || [];
 }
 
-function AddItemToCart(state: CartState, action: Action<ICartItemGetDto>): void {
+function TryAddItemToCart(state: CartState, action: Action<ICartItemGetDto>): void {
 	if (action.payload !== undefined) {
-		state.cart.push(action.payload);
+		AddItemToCart(state, action.payload);
 	}
 }
 
@@ -42,4 +44,14 @@ function RemoveItemFromCart(state: CartState, action: Action<ICartItemGetDto>): 
 
 function InitializeNewCart(state: CartState, action: Action<undefined>): void {
 	state.cart = [];
+}
+
+function AddItemToCart(state: CartState, itemToAdd: ICartItemGetDto): void {
+	const existingItemIndex = state.cart.findIndex((item) => item.id === itemToAdd.id);
+
+	if (existingItemIndex !== INDEX_OF_NOT_FOUND) {
+		state.cart[existingItemIndex].amount += itemToAdd.amount;
+	} else {
+		state.cart.push(itemToAdd);
+	}
 }

@@ -1,22 +1,34 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
-import { Box, Card, CardActions, CardHeader, CardMedia, Grid, IconButton, Stack, Typography } from '@mui/material';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
-import { IItemShortGetDto } from '../../data/DTOs/item/ItemShortGetDto';
+import DisplayNotification from '../../helpers/DisplayNotification';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { Box, Card, CardActions, CardHeader, CardMedia, Grid, IconButton, Typography } from '@mui/material';
+
+import { IItemShortGetDto } from '../../data/DTOs/item/ItemShortGetDto';
 import { InsertItemToCart } from '../../redux/actions/CartActions';
+import { NotificationData } from '../../redux/types/NotificationData';
 
 interface Props {
-	data: IItemShortGetDto
+	data: IItemShortGetDto;
 }
 
 const Product: React.FC<Props> = (props: Props) => {
 	const dispatch = useAppDispatch();
 
 	const AddToCart = () => {
-	  dispatch(InsertItemToCart({...props.data, amount: 1}))
-	}
+		dispatch(InsertItemToCart({ ...props.data, amount: 1 }));
+
+		const notification: NotificationData = {
+			message: 'Item was added to the cart!',
+			severity: 'success',
+			id: uuid(),
+		};
+
+		DisplayNotification({ dispatch, notification });
+	};
 
 	return (
 		<Grid
@@ -39,7 +51,10 @@ const Product: React.FC<Props> = (props: Props) => {
 						image="https://random.imagecdn.app/300/300"
 					/>
 					<CardActions sx={{ justifyContent: 'center' }}>
-						<IconButton sx={{ padding: 1, borderRadius: 3 }} onClick={AddToCart}>
+						<IconButton
+							sx={{ padding: 1, borderRadius: 3 }}
+							onClick={AddToCart}
+						>
 							<AddShoppingCartIcon />
 							<Typography
 								ml={2}
