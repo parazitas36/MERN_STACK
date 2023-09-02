@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING as string)
   })
   .catch((err) => console.log(err));
 
-const allowedOrigins = ['http://localhost:3000', 'localhost:3000'];
+const allowedOrigins = ['*'];
 
 const options: cors.CorsOptions = {
   origin: allowedOrigins
