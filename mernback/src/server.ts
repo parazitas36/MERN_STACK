@@ -22,7 +22,8 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING as string)
 const allowedOrigins = ['*'];
 
 const options: cors.CorsOptions = {
-  origin: allowedOrigins
+  origin: '*',
+  methods: ['GET']
 };
 
 app.use(cors(options));

@@ -22,7 +22,7 @@ export function useFetch<T>(props: FetchProps) {
 	useEffect(() => {
 		(async () => {
 			try {
-				const resp = await fetch(`${API_URL}{endpoint}`, {
+				const resp = await fetch(`${API_URL}${props.endpoint}`, {
 					method: 'get',
 					headers: props.headers,
 					signal: controller.signal,
