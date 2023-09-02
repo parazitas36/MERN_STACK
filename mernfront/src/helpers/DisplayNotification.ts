@@ -1,8 +1,6 @@
 import { NotificationData } from '../redux/types/NotificationData';
 import { HideNotification, ShowNotification } from '../redux/actions/NotificationsActions';
 import { AnyAction, Dispatch, ThunkDispatch } from '@reduxjs/toolkit';
-import { CartState } from '../redux/types/CartState';
-import { NotificationsState } from '../redux/types/NotificationsState';
 
 const NOTIFICATION_APPEARANCE_DURATION_MS = 2000;
 

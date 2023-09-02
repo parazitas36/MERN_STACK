@@ -3,7 +3,6 @@ import { CircularProgress, Container, Grid } from '@mui/material';
 import Product from '../components/Product';
 import { IItemShortGetDto } from '../data/DTOs/item/ItemShortGetDto';
 import { useFetch } from '../hooks/useFetch';
-import Notifications from '../components/Notifications';
 
 const MainPage: React.FC = () => {
 	const { data, error, statusCode, isLoading } = useFetch<IItemShortGetDto[]>({
@@ -34,7 +33,6 @@ const MainPage: React.FC = () => {
 					/>
 				))}
 			</Grid>
-			<Notifications />
 		</Container>
 	);
 };

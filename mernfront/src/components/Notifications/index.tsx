@@ -11,7 +11,7 @@ const Notifications = () => {
 
 	return (
 		<Snackbar open={notifications.length > 0}>
-			<Stack sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+			<Stack sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, marginBottom: { xs: 7, sm: 6 } }}>
 				{notifications?.map((notification) => {
 					return (
 						<MuiAlert
