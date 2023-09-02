@@ -4,9 +4,11 @@ const MAX_REQUEST_DURATION_MS = 5000;
 const ERROR_STATUS_CODE = 500;
 
 interface FetchProps {
-	url: string;
+	endpoint: string;
 	headers?: HeadersInit;
 }
+
+const API_URL = "https://mern-api-zzah.onrender.com";
 
 export function useFetch<T>(props: FetchProps) {
 	const [data, setData] = useState<T | null>(null);
@@ -20,7 +22,7 @@ export function useFetch<T>(props: FetchProps) {
 	useEffect(() => {
 		(async () => {
 			try {
-				const resp = await fetch(props.url, {
+				const resp = await fetch(`${API_URL}{endpoint}`, {
 					method: 'get',
 					headers: props.headers,
 					signal: controller.signal,
@@ -42,7 +44,7 @@ export function useFetch<T>(props: FetchProps) {
                 setIsLoading(false);
 			}
 		})();
-	}, [props.url]);
+	}, [props.endpoint]);
 
 	return { data, error, statusCode, isLoading };
 }

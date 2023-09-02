@@ -3,10 +3,11 @@ import { CircularProgress, Container, Grid } from '@mui/material';
 import Product from '../components/Product';
 import { IItemShortGetDto } from '../data/DTOs/item/ItemShortGetDto';
 import { useFetch } from '../hooks/useFetch';
+import { ItemEndpoints } from '../api/endpoints/ItemEndpoints';
 
 const MainPage: React.FC = () => {
 	const { data, error, statusCode, isLoading } = useFetch<IItemShortGetDto[]>({
-		url: 'http://localhost:8080/items',
+		endpoint: ItemEndpoints.Base,
 	});
 
 	if (isLoading) {
