@@ -2,7 +2,7 @@
   "name": "mernfront",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://parazitas36.github.io",
+  "homepage": "https://parazitas36.github.io/MERN_STACK",
   "main": "index.js",
   "scripts": {
     "predeploy": "npm run build",

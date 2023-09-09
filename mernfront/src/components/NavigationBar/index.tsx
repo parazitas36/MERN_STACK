@@ -4,22 +4,22 @@ import { AppBar, Container, Toolbar } from '@mui/material';
 
 import ResponsiveNavbar from '../ResponsiveNavbar';
 import { NavItem } from '../../data/types/NavItem';
-import CartMenuComponent from '../Cart/CartMenuComponent';
+import CartMenuButton from '../CartMenu/CartMenuButton';
 
 const NavigationBar: React.FC = () => {
 	const links: NavItem[] = [
 		{
-			label: 'Label 1',
-			component: <CartMenuComponent />,
-			route: '/label1',
+			label: 'Cart',
+			component: <CartMenuButton />,
+			route: '/cart',
 		},
 		{
 			label: 'Label 2',
 			route: '/label2',
 		},
 		{
-			label: 'Label 3',
-			route: '/label3',
+			label: 'Sign in',
+			route: '/auth',
 		},
 	];
 	return (

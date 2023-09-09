@@ -18,7 +18,7 @@ interface Props {
 	item: ICartItemGetDto;
 }
 
-const CartMenuItem = (props: Props) => {
+const CartItem = (props: Props) => {
 	const dispatch = useAppDispatch();
 
 	const Remove = () => {
@@ -62,4 +62,4 @@ const CartMenuItem = (props: Props) => {
 	);
 };
 
-export default CartMenuItem;
+export default CartItem;

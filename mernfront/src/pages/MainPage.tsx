@@ -27,9 +27,9 @@ const MainPage: React.FC = () => {
 				spacing={2}
 				container
 			>
-				{data?.map((product, i) => (
+				{data?.map((product) => (
 					<Product
-						key={i}
+						key={product.id}
 						data={product}
 					/>
 				))}

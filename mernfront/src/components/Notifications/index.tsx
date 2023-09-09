@@ -19,6 +19,7 @@ const Notifications = () => {
 							onClose={() => dispatch(HideNotification(notification))}
 							severity={notification.severity}
 							sx={{ width: '100%' }}
+							key={notification.id}
 						>
 							{notification.message}
 						</MuiAlert>

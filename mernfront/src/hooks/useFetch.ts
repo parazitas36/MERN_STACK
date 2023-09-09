@@ -8,7 +8,8 @@ interface FetchProps {
 	headers?: HeadersInit;
 }
 
-const API_URL = "https://mern-api-zzah.onrender.com";
+//const API_URL = "https://mern-api-zzah.onrender.com";
+const API_URL = "http://localhost:8080";
 
 export function useFetch<T>(props: FetchProps) {
 	const [data, setData] = useState<T | null>(null);

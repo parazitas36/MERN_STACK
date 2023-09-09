@@ -38,7 +38,12 @@ function TryAddItemToCart(state: CartState, action: Action<ICartItemGetDto>): vo
 
 function RemoveItemFromCart(state: CartState, action: Action<ICartItemGetDto>): void {
 	if (action.payload !== undefined) {
-		state.cart = state.cart.filter((item) => item.id !== action.payload?.id);
+		state.cart = state.cart.map((item) => {
+			item.amount = item.id === action.payload?.id 
+				? item.amount - 1 
+				: item.amount;
+			return item;
+		}).filter(item => item.amount > 0);
 	}
 }
 
