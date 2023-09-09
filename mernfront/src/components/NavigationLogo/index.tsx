@@ -12,7 +12,7 @@ const NavigationLogo: React.FC = () => {
 			flexGrow={1}
 			sx={{ display: 'flex', alignItems: 'center' }}
 		>
-			<IconButton sx={{ borderRadius: 5 }} onClick={() => navigate('/')}>
+			<IconButton sx={{ borderRadius: 2 }} onClick={() => navigate('/')}>
 				<Typography
 					variant="h4"
 					noWrap
