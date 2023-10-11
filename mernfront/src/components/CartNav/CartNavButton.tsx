@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge, IconButton, Popper, Tooltip } from '@mui/material';
-import CartMenuList from './CartMenuList';
+import CartNavList from './CartNavList';
 import { useAppSelector } from '../../hooks/useAppSelector';
 
-const CartMenuButton = () => {
+const CartNavButton = () => {
 	const cart = useAppSelector(states => states.cartState.cart);
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -33,10 +33,10 @@ const CartMenuButton = () => {
 				anchorEl={anchorEl}
 				sx={{ zIndex: 1200, borderRadius: 3, overflow: 'hidden', boxShadow: 10 }}
 			>
-				<CartMenuList />
+				<CartNavList />
 			</Popper>
 		</>
 	);
 };
 
-export default CartMenuButton;
+export default CartNavButton;

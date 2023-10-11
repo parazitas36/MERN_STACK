@@ -1,7 +1,7 @@
 import CartList from '../../features/Cart/CartList';
 import React from 'react';
 
-const CartMenuList = () => {
+const CartNavList = () => {
 	return (
 		<CartList
 			cartWindowSxProps={{ maxWidth: 400, maxHeight: 450 }}
@@ -11,4 +11,4 @@ const CartMenuList = () => {
 	);
 };
 
-export default CartMenuList;
+export default CartNavList;

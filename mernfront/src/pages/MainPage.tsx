@@ -4,8 +4,10 @@ import Product from '../components/Product';
 import { IItemShortGetDto } from '../data/DTOs/item/ItemShortGetDto';
 import { useFetch } from '../hooks/useFetch';
 import { ItemEndpoints } from '../api/endpoints/ItemEndpoints';
+import Auth from '../features/Auth';
 
 const MainPage: React.FC = () => {
+	return <Auth />
 	const { data, error, statusCode, isLoading } = useFetch<IItemShortGetDto[]>({
 		endpoint: ItemEndpoints.Base,
 	});
