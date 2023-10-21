@@ -1,30 +1,32 @@
 import { useEffect, useState } from 'react';
 
-const MAX_REQUEST_DURATION_MS = Number(process.env.MAX_REQUEST_DURATION_MS!);
+const MAX_REQUEST_DURATION_MS = process.env.MAX_REQUEST_DURATION_M!;
 const ERROR_STATUS_CODE = process.env.ERROR_STATUS_CODE!;
 
-interface FetchProps {
+interface FetchProps<U> {
 	endpoint: string;
 	headers?: HeadersInit;
+    body: U,
 }
 
 //const API_URL = "https://mern-api-zzah.onrender.com";
 const API_URL = process.env.API_URL!;
 
-export function useFetch<T>(props: FetchProps) {
+export function usePost<U, T>(props: FetchProps<U>) {
 	const [data, setData] = useState<T | null>(null);
 	const [error, setError] = useState<any>(null);
 	const [statusCode, setStatusCode] = useState<number | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	const controller = new AbortController();
-	const timeOutId = setTimeout(() => controller.abort(), MAX_REQUEST_DURATION_MS);
+	const timeOutId = setTimeout(() => controller.abort(), Number(MAX_REQUEST_DURATION_MS));
 
 	useEffect(() => {
 		(async () => {
 			try {
 				const resp = await fetch(`${API_URL}${props.endpoint}`, {
-					method: 'get',
+					method: 'post',
+                    body: JSON.stringify(props.body),
 					headers: props.headers,
 					signal: controller.signal,
 				});

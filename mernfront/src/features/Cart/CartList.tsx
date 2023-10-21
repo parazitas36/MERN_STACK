@@ -5,6 +5,8 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import CartEmpty from './CartEmpty';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
+import { Emit } from '../../helpers/EventHandler';
+import { Events } from '../../helpers/Events';
 
 interface Props {
 	cartWindowSxProps: SxProps;
@@ -21,6 +23,11 @@ const CartList = (props: Props) => {
 	const SumMemo = useMemo(() => {
 		return cartItems.reduce((sum, item) => sum + item.price * item.amount, 0).toFixed(2);
 	}, [cartItems]);
+
+	const navigateToCartListPage = () => {
+		Emit(Events.ClosePoppers);
+		navigate('/cart');
+	}
 
 	if (cartItems.length > 0) {
 		return (
@@ -41,7 +48,7 @@ const CartList = (props: Props) => {
 				{props.shouldShowBuyButton == true ? (
 					<ListItem sx={{ display: 'flex', justifyContent: 'center' }}>
 						<Button
-							onClick={() => navigate('/cart')}
+							onClick={navigateToCartListPage}
 							variant="contained"
 							color="primary"
 							sx={{ paddingX: 3, paddingY: 1, width: '90%' }}

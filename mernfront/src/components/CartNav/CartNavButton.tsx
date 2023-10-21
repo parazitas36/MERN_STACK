@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge, IconButton, Popper, Tooltip } from '@mui/material';
 import CartNavList from './CartNavList';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { Emit, Subscribe } from '../../helpers/EventHandler';
+import { Events } from '../../helpers/Events';
 
 const CartNavButton = () => {
 	const cart = useAppSelector(states => states.cartState.cart);
@@ -10,10 +12,16 @@ const CartNavButton = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+		Emit(Events.ClosePoppers);
 		setAnchorEl(anchorEl ? null : event.currentTarget);
 	};
 
 	const id = 'cart-menu-button';
+
+	useEffect(() => {
+		Subscribe(Events.ClosePoppers, () => setAnchorEl(null));
+	}, [])
+	
 
 	return (
 		<>

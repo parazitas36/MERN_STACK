@@ -4,7 +4,7 @@ import './index.css';
 import { App } from './App';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -16,7 +16,7 @@ const root = createRoot(container);
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<Router>
+			<Router basename='/' >
 				<App />
 			</Router>
 		</Provider>
