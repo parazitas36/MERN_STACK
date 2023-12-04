@@ -1,14 +1,16 @@
 import { Box, Container, Stack } from '@mui/material';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import Login from './Login';
 import AuthTab from './AuthTab';
 import { TAuthTypes } from './TAuthTypes';
 import { useParams } from 'react-router-dom';
 import Register from './Register';
+import { Subscribe } from '../../helpers/EventHandler';
+import { Events } from '../../helpers/Events';
 
 const Auth = () => {
 	const params = useParams();
-	const defaultTab = params?.type !== null && params.type === 'register' ? 'sign up' : 'sign in';
+	const defaultTab = params?.type === 'register' ? 'sign up' : 'sign in';
 	const [selectedTab, setSelectedTab] = useState<TAuthTypes>(defaultTab);
 
 	const switchTab = useCallback(
@@ -17,6 +19,12 @@ const Auth = () => {
 		},
 		[selectedTab],
 	);
+
+	useEffect(() => {
+		Subscribe(Events.SwitchTabToSignIn, () => switchTab('sign in'));
+		Subscribe(Events.SwitchTabToSignUp, () => switchTab('sign up'));
+	}, [])
+	
 
 	return (
 		<Box

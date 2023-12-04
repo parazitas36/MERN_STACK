@@ -23,8 +23,9 @@ const Login = (props: Props) => {
 		e.preventDefault();
 	};
 
-	const navigateToAuthPage = () => {
+	const navigateToRegistration = () => {
 		Emit(Events.ClosePoppers);
+		Emit(Events.SwitchTabToSignUp);
 		navigation('auth/register');
 	}
 
@@ -78,7 +79,7 @@ const Login = (props: Props) => {
 							color="primary"
 							type="button"
 							size="medium"
-							onClick={navigateToAuthPage}
+							onClick={navigateToRegistration}
 						>
 							<Typography
 								variant="button"
