@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import {
 	Stack,
@@ -11,9 +11,6 @@ import {
 	InputLabel,
 	FormControl,
 	FormHelperText,
-	Alert,
-	Snackbar,
-	AlertColor,
 } from '@mui/material';
 import Logo from './Logo';
 import { IUserPostDto } from '../../data/DTOs/user/UserPostDto';
@@ -22,6 +19,10 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Emit } from '../../helpers/EventHandler';
 import { Events } from '../../helpers/Events';
+import { NotificationOptions } from './index'
+import { usePost } from '../../hooks/usePost';
+import { UserEndpoints } from '../../api/endpoints/UserEndpoints';
+import { StatusCodes } from '../../data/enums/StatusCodes';
 
 interface RegisterDataValidationErrors {
 	NameError: string | undefined;
@@ -31,17 +32,16 @@ interface RegisterDataValidationErrors {
 	RepeatPasswordError: string | undefined;
 }
 
-interface NotificationOptions {
-	message: string;
-	severity: AlertColor | undefined;
+interface Props {
+	notification: NotificationOptions,
+	setNotification: React.Dispatch<React.SetStateAction<NotificationOptions>>
 }
 
-const Register = () => {
-	const ref = useRef(null);
-	const [notification, setNotification] = useState<NotificationOptions>({
-		message: '',
-		severity: undefined,
+const Register: React.FC<Props> = (props: Props) => {
+	const postCall = usePost<IUserPostDto, any>({
+		endpoint: UserEndpoints.Register,
 	});
+
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [validation, setValidation] = useState<RegisterDataValidationErrors | null>(null);
 	const [registerData, setRegisterData] = useState<IUserPostDto>({
@@ -70,24 +70,45 @@ const Register = () => {
 		});
 	}, [registerData]);
 
-	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const onSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const invalidField = Object.values(validation!).find((x) => x !== undefined);
 		if (invalidField !== undefined) {
-			setNotification({
-				message: 'Entered data is invalid!',
-				severity: 'error'
-			})
+			ShowInvalidDataNotification();
 			return;
 		}
 
-		setNotification({
+		await postCall.PostData(registerData);
+
+		if (postCall.statusCode.current !== StatusCodes.CREATED) {
+			ShowFailedNotification();
+			return;
+		}
+
+		ShowSuccessNotification();
+		Emit(Events.SwitchTabToSignIn);
+	};
+
+	const ShowSuccessNotification = () => {
+		props.setNotification({
 			message: 'Registration was successful!',
 			severity: 'success'
 		});
+	}
 
-		Emit(Events.SwitchTabToSignIn);
-	};
+	const ShowFailedNotification = () => {
+		props.setNotification({
+			message: 'Registration failed, please try again!',
+			severity: 'error'
+		});
+	}
+
+	const ShowInvalidDataNotification = () => {
+		props.setNotification({
+			message: 'Entered data is invalid!',
+			severity: 'error'
+		})
+	}
 
 	return (
 		<Container
@@ -189,20 +210,6 @@ const Register = () => {
 							Register
 						</Typography>
 					</Button>
-					<Snackbar
-						open={(notification?.message.length ?? 0) > 0}
-						onClose={() => setNotification({...notification, message: ""})}
-						autoHideDuration={2000}
-						anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-					>
-						<Alert
-							severity={notification?.severity}
-							sx={{ width: '100%', marginBottom: { xs: 7, sm: 6 } }}
-							variant='filled'
-						>
-							{notification?.message}
-						</Alert>
-					</Snackbar>
 				</Stack>
 			</form>
 		</Container>

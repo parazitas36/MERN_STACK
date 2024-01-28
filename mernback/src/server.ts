@@ -2,10 +2,10 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import { UsersRouter } from './routes/UsersRouter';
-import { EntitiesEndpoints } from './routes/routeEnums/EntitiesEndpoints';
-import { ItemsRouter } from './routes/ItemsRouter';
-import { CartsRouter } from './routes/CartsRouter';
+import { UsersController } from './controllers/UsersController';
+import { EntitiesEndpoints } from './controllers/routeEnums/EntitiesEndpoints';
+import { ItemsController } from './controllers/ItemsController';
+import { CartsController } from './controllers/CartsController';
 import { StatusCodes } from './enums/StatusCodes';
 
 dotenv.config();
@@ -19,8 +19,6 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING as string)
   })
   .catch((err) => console.log(err));
 
-const allowedOrigins = ['*'];
-
 const options: cors.CorsOptions = {
   origin: '*',
   methods: ['GET']
@@ -29,9 +27,9 @@ const options: cors.CorsOptions = {
 app.use(cors(options));
 app.use(express.json());
 
-app.use(EntitiesEndpoints.Users, UsersRouter);
-app.use(EntitiesEndpoints.Items, ItemsRouter);
-app.use(EntitiesEndpoints.Carts, CartsRouter);
+app.use(EntitiesEndpoints.Users, UsersController);
+app.use(EntitiesEndpoints.Items, ItemsController);
+app.use(EntitiesEndpoints.Carts, CartsController);
 
 app.use('/*', (req: Request, res: Response) => res.status(StatusCodes.NOT_FOUND).send());
 

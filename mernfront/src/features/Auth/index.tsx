@@ -1,24 +1,34 @@
-import { Box, Container, Stack } from '@mui/material';
+import { Alert, AlertColor, Box, Container, Snackbar, Stack } from '@mui/material';
 import React, { useCallback, useState, useEffect } from 'react';
 import Login from './Login';
 import AuthTab from './AuthTab';
-import { TAuthTypes } from './TAuthTypes';
+import { AuthTypes } from './AuthTypes';
 import { useParams } from 'react-router-dom';
 import Register from './Register';
 import { Subscribe } from '../../helpers/EventHandler';
 import { Events } from '../../helpers/Events';
 
+export interface NotificationOptions {
+	message: string;
+	severity: AlertColor | undefined;
+}
+
 const Auth = () => {
 	const params = useParams();
 	const defaultTab = params?.type === 'register' ? 'sign up' : 'sign in';
-	const [selectedTab, setSelectedTab] = useState<TAuthTypes>(defaultTab);
+	const [selectedTab, setSelectedTab] = useState<AuthTypes>(defaultTab);
 
 	const switchTab = useCallback(
-		(type: TAuthTypes) => {
+		(type: AuthTypes) => {
 			setSelectedTab(type);
 		},
 		[selectedTab],
 	);
+
+	const [notification, setNotification] = useState<NotificationOptions>({
+		message: '',
+		severity: undefined,
+	});
 
 	useEffect(() => {
 		Subscribe(Events.SwitchTabToSignIn, () => switchTab('sign in'));
@@ -70,7 +80,21 @@ const Auth = () => {
 					maxWidth="xs"
 					sx={{ backgroundColor: 'background.paper' }}
 				>
-					{selectedTab === 'sign in' ? <Login /> : <Register />}
+					{selectedTab === 'sign in' ? <Login /> : <Register notification={notification} setNotification={setNotification}/>}
+					<Snackbar
+						open={(notification?.message.length ?? 0) > 0}
+						onClose={() => setNotification({...notification, message: ""})}
+						autoHideDuration={2000}
+						anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+					>
+						<Alert
+							severity={notification?.severity}
+							sx={{ width: '100%', marginBottom: { xs: 7, sm: 6 } }}
+							variant='filled'
+						>
+							{notification?.message}
+						</Alert>
+					</Snackbar>
 				</Container>
 			</Container>
 		</Box>

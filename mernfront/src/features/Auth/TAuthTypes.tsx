@@ -1,1 +1,0 @@
-export type TAuthTypes = 'sign in' | 'sign up';

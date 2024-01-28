@@ -1,53 +1,47 @@
-import { useEffect, useState } from 'react';
+import { useRef } from 'react';
 
-const MAX_REQUEST_DURATION_MS = process.env.MAX_REQUEST_DURATION_M!;
+const MAX_REQUEST_DURATION_MS = process.env.MAX_REQUEST_DURATION_MS!;
 const ERROR_STATUS_CODE = process.env.ERROR_STATUS_CODE!;
 
-interface FetchProps<U> {
+interface FetchProps {
 	endpoint: string;
 	headers?: HeadersInit;
-    body: U,
 }
 
 //const API_URL = "https://mern-api-zzah.onrender.com";
 const API_URL = process.env.API_URL!;
 
-export function usePost<U, T>(props: FetchProps<U>) {
-	const [data, setData] = useState<T | null>(null);
-	const [error, setError] = useState<any>(null);
-	const [statusCode, setStatusCode] = useState<number | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+export function usePost<U, T>(props: FetchProps) {
+	const data = useRef<T | null>(null);
+	const error = useRef<any>(null);
+	const statusCode = useRef<number | null>(null);
+	const isLoading = useRef(true);
 
-	const controller = new AbortController();
-	const timeOutId = setTimeout(() => controller.abort(), Number(MAX_REQUEST_DURATION_MS));
+	const PostData = async (body: U) => {
+		const controller = new AbortController();
+		const timeOutId = setTimeout(() => controller.abort(), Number(MAX_REQUEST_DURATION_MS));
 
-	useEffect(() => {
-		(async () => {
-			try {
-				const resp = await fetch(`${API_URL}${props.endpoint}`, {
-					method: 'post',
-                    body: JSON.stringify(props.body),
-					headers: props.headers,
-					signal: controller.signal,
-				});
+		try {
+			const resp = await fetch(`${API_URL}${props.endpoint}`, {
+				method: 'post',
+				body: JSON.stringify(body),
+				headers: {
+					...props.headers ?? {},
+					'Content-Type': 'application/json',
+				},
+				signal: controller.signal,
+			});
 
-				clearTimeout(timeOutId);
+			clearTimeout(timeOutId);
+			statusCode.current = resp.status;
+		} catch (err) {
+			controller.abort();
+			error.current = err;
+			statusCode.current = Number(ERROR_STATUS_CODE);
+		} finally {
+			isLoading.current = false;
+		}
+	};
 
-				if (resp.ok) {
-					const json: T = await resp.json();
-					setData(json);
-				}
-
-				setStatusCode(resp.status);
-			} catch (error) {
-                controller.abort();
-				setError(error);
-                setStatusCode(Number(ERROR_STATUS_CODE));
-			} finally {
-                setIsLoading(false);
-			}
-		})();
-	}, [props.endpoint]);
-
-	return { data, error, statusCode, isLoading };
+	return { PostData, data, error, statusCode, isLoading };
 }

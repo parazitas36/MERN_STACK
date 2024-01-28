@@ -1,53 +1,43 @@
-import { Request, Response } from 'express';
 import { IItemPostDto, ItemPostDto } from '../DTOs/item/ItemPostDto';
 import { IItem, Item } from '../models/Item';
 import { MapToIItem, MapToIItemShortGetDtoArray } from '../mappers/ItemMappers';
-import { StatusCodes } from '../enums/StatusCodes';
+import { IItemShortGetDto } from '../DTOs/item/ItemShortGetDto';
+import { ItemCategory } from '../enums/ItemCategory';
 
-export async function GetAllItems(req: Request, res: Response): Promise<void> {
+export async function GetAllItems(): Promise<IItemShortGetDto[]> {
   const items = await Item.find({});
-  res.status(StatusCodes.OK).send(MapToIItemShortGetDtoArray(items));
+  return MapToIItemShortGetDtoArray(items);
 }
 
-export async function GetAllItemsByCategory(req: Request, res: Response): Promise<void> {
-  const items = await Item.find({ category: req.params['category'] });
-  res.status(StatusCodes.OK).send(items);
+export async function GetAllItemsByCategory(category: ItemCategory): Promise<IItem[]> {
+  return await Item.find({ category: category});
 }
 
-export async function GetItemById(req: Request, res: Response): Promise<void> {
-  const item = await Item.findById(req.params['id']);
-  res.status(item !== null ? StatusCodes.OK : StatusCodes.NOT_FOUND).send(item);
+export async function GetItemById(id: string): Promise<IItem | null> {
+  return await Item.findById(id);
 }
 
-export async function PostItem(req: Request, res: Response): Promise<void> {
-  const itemDto: IItemPostDto = req.body;
-  await TryCreateItem(itemDto, res);
+/**
+ * Creates new item in database.
+ * @param itemDto New item's information.
+ * @returns Outcome if creation was successful or not.
+ */
+export async function PostItem(itemDto: IItemPostDto): Promise<boolean> {
+  const item = new ItemPostDto(itemDto);
+  return await CreateItem(item);
 }
 
 export async function FindItemsByIds(itemIds: string[]): Promise<IItem[]> {
   return await Item.find({ _id: { $in: itemIds } }).exec();
 }
 
-async function TryCreateItem(itemDto: IItemPostDto, res: Response): Promise<void> {
-  try {
-    await CreateItem(new ItemPostDto(itemDto), res);
-  } catch (error) {
-    HandleError(error as Error, res);
-  }
-}
-
-async function CreateItem(itemDto: ItemPostDto, res: Response): Promise<void> {
+async function CreateItem(itemDto: ItemPostDto): Promise<boolean> {
   if (await DoesItemExist(itemDto)) {
-    res.status(StatusCodes.CONFLICT).send();
-  } else {
-    await Item.create(MapToIItem(itemDto));
-    res.status(StatusCodes.CREATED).send();
-  }
-}
-
-function HandleError(error: Error, res: Response): void {
-  console.log(error);
-  res.status(StatusCodes.BAD_REQUEST).send();
+    return false;
+  } 
+  
+  await Item.create(MapToIItem(itemDto));
+  return true;
 }
 
 async function DoesItemExist(itemDto: ItemPostDto): Promise<boolean> {
