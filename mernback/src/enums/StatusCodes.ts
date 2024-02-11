@@ -5,4 +5,6 @@ export enum StatusCodes {
   BAD_REQUEST = 400,
   NOT_FOUND = 404,
   CONFLICT = 409,
+  Unauthorized = 401,
+  Forbidden = 403,
 }

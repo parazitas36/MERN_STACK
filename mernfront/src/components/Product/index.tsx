@@ -48,7 +48,7 @@ const Product: React.FC<Props> = (props: Props) => {
 					<CardMedia
 						component="img"
 						sx={{ overflow: 'hidden' }}
-						image="https://random.imagecdn.app/300/300"
+						image="https://picsum.photos/300/300"
 					/>
 					<CardActions sx={{ justifyContent: 'center' }}>
 						<IconButton

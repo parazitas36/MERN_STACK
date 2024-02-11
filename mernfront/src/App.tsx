@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import GuestRoutes from './routes/GuestRoutes';
 import NavigationBar from './components/NavigationBar';
@@ -7,6 +7,23 @@ import Footer from './components/Footer';
 import Notifications from './components/Notifications';
 
 export const App: React.FC = () => {
+	const oauthLogin = async () => {
+		try {
+			const url = `${process.env.API_URL as string}/auth/login`;
+			const response = await fetch(url, {
+				credentials: 'include',
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	useEffect(() => {
+		(async() => {
+			await oauthLogin();
+		})();
+	}, []);
+
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
 			<NavigationBar />

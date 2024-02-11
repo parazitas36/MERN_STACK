@@ -6,6 +6,7 @@ import Logo from './Logo';
 import { useNavigate } from 'react-router-dom';
 import { Emit } from '../../helpers/EventHandler';
 import { Events } from '../../helpers/Events';
+import GoogleButton from '../../components/GoogleButton';
 
 interface Props {
 	isInPopper?: boolean;
@@ -89,6 +90,7 @@ const Login = (props: Props) => {
 							</Typography>
 						</Button>
 					)}
+					<GoogleButton />
 				</Stack>
 			</form>
 		</Container>
