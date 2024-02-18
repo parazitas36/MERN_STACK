@@ -8,4 +8,8 @@ export enum ActionsEnum {
 	// Notifications actions
 	ShowNotificationBar,
 	HideNotificationBar,
+
+	// Account actions
+	LoggedIn,
+	LoggedOut,
 }

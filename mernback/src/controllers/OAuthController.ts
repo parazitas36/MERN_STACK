@@ -17,8 +17,12 @@ router.get(AuthEndpoints.Login, (req: Request, res: Response) => {
 });
 
 router.get(AuthEndpoints.Logout, (req: Request, res: Response) => {
+    const responseData: ResponseResult<undefined> = {
+        status: StatusCodes.OK,
+    }
+
     req.logout(() => {});
-    res.redirect(process.env.CLIENT_URL as string);
+    RequestsHandler({ req, res, callback: async() => responseData })
 });
 
 router.get(
