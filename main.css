@@ -1,8 +1,14 @@
+/*!*****************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/index.css ***!
+  \*****************************************************************/
 body {
   margin: 0;
   padding: 0;
   min-width: 350px;
 }
+/*!*******************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/@fontsource/roboto/300.css ***!
+  \*******************************************************************************************/
 /* roboto-cyrillic-ext-300-normal */
 @font-face {
   font-family: 'Roboto';
@@ -72,6 +78,9 @@ body {
   src: url(c48fb6765a9fcb00b330.woff2) format('woff2'), url(0515ab82dae6923cab85.woff) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
+/*!*******************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/@fontsource/roboto/400.css ***!
+  \*******************************************************************************************/
 /* roboto-cyrillic-ext-400-normal */
 @font-face {
   font-family: 'Roboto';
@@ -141,6 +150,9 @@ body {
   src: url(b009a76ad6afe4ebd301.woff2) format('woff2'), url(3f2b9a42f643e62a49b7.woff) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
+/*!*******************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/@fontsource/roboto/500.css ***!
+  \*******************************************************************************************/
 /* roboto-cyrillic-ext-500-normal */
 @font-face {
   font-family: 'Roboto';
@@ -210,6 +222,9 @@ body {
   src: url(f25d774ecfe0996f8eb5.woff2) format('woff2'), url(1f075502d0094a398e21.woff) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
+/*!*******************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/@fontsource/roboto/700.css ***!
+  \*******************************************************************************************/
 /* roboto-cyrillic-ext-700-normal */
 @font-face {
   font-family: 'Roboto';
@@ -279,3 +294,5 @@ body {
   src: url(227c93190fe7f82de3f8.woff2) format('woff2'), url(666d7a2f9db53cf52e2d.woff) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
+
+/*# sourceMappingURL=main.css.map*/
