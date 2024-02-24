@@ -81303,7 +81303,7 @@ const App = () => {
             return;
         }
         try {
-            const url = `${"http://localhost:8080"}/auth/login`;
+            const url = `${"https://mern-api-zzah.onrender.com"}/auth/login`;
             const response = await fetch(url, {
                 credentials: 'include',
             });
@@ -81499,7 +81499,7 @@ const Profile = ({ accountState }) => {
         if (!accountState?.accountInfo) {
             return;
         }
-        const url = `${"http://localhost:8080"}/auth/logout`;
+        const url = `${"https://mern-api-zzah.onrender.com"}/auth/logout`;
         const response = await fetch(url, {
             credentials: 'include',
         });
@@ -82629,7 +82629,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   OAuthGoogle: () => (/* binding */ OAuthGoogle)
 /* harmony export */ });
 const OAuthGoogle = () => {
-    window.open(`${"http://localhost:8080"}/auth/google/callback`, "_self");
+    window.open(`${"https://mern-api-zzah.onrender.com"}/auth/google/callback`, "_self");
 };
 
 
@@ -82689,7 +82689,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const MAX_REQUEST_DURATION_MS = Number("5000");
 //const API_URL = "https://mern-api-zzah.onrender.com";
-const API_URL = "http://localhost:8080";
+const API_URL = "https://mern-api-zzah.onrender.com";
 function useFetch(props) {
     const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
     const [error, setError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
@@ -82746,7 +82746,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const MAX_REQUEST_DURATION_MS = "5000";
 //const API_URL = "https://mern-api-zzah.onrender.com";
-const API_URL = "http://localhost:8080";
+const API_URL = "https://mern-api-zzah.onrender.com";
 function usePost(props) {
     const data = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
     const error = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
