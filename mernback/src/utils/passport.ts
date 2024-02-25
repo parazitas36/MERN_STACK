@@ -37,15 +37,11 @@ const verifyCallback = async(req: express.Request, accessToken: string, refreshT
 passport.use(new GoogleStrategy(options, verifyCallback));
 
 passport.serializeUser((user, done) => {
-    process.nextTick(function(){
-        console.log('serialize:', user);
-        return done(null, user);
-    })
+    console.log('serialize:', user);
+    return done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-    process.nextTick(function() {
-        console.log('deserialize:', user);
-        return done(null, user as Express.User);
-    });
+    console.log('deserialize:', user);
+    return done(null, user as Express.User);
 });
