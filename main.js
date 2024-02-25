@@ -81305,9 +81305,6 @@ const App = () => {
         try {
             const url = `${"https://mern-api-zzah.onrender.com"}/auth/login`;
             const response = await fetch(url, {
-                headers: {
-                    'Access-Control-Allow-Origin': "https://mern-api-zzah.onrender.com",
-                },
                 credentials: 'include',
             });
             const accountInfo = await response.json();
