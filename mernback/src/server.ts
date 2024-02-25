@@ -51,6 +51,8 @@ const options: cors.CorsOptions = {
 
 app.set('trust proxy', process.env.PROXY as string === 'true' ? 1 : 0);
 
+app.use(passport.initialize());
+
 app.use(
  session({
   proxy: process.env.PROXY as string === 'true',
@@ -66,7 +68,6 @@ app.use(
  })
 )
 
-app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors(options));

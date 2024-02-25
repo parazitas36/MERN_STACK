@@ -44,13 +44,13 @@ passport.use(new GoogleStrategy(options, verifyCallback));
 passport.serializeUser((user, done) => {
     process.nextTick(function(){
         console.log('serialize:', user);
-        done(null, user);
+        return done(null, user);
     })
 });
 
 passport.deserializeUser((user: Express.User | undefined, done) => {
     process.nextTick(function() {
         console.log('deserialize:', user);
-        done(null, user);
+        return done(null, user);
     });
 });
