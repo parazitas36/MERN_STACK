@@ -49,7 +49,7 @@ const options: cors.CorsOptions = {
   credentials: true,
 };
 
-app.set('trust proxy', process.env.PROXY as string === 'true' ? 1 : 0);
+app.set('trust proxy', 1);
 
 app.use(
   session({
