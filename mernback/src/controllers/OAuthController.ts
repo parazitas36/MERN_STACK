@@ -8,6 +8,11 @@ import { RequestsHandler } from "../utils/general/RequestsHandler";
 const router = Router();
 
 router.get(AuthEndpoints.Login, (req: Request, res: Response) => {
+    passport.authenticate('google', (err: any, user: any, info: any) => {
+        console.log('err: ', err);
+        console.log('user: ', user);
+        console.log('info: ', info);
+    })
     console.log('login user:', req.user);
     const responseData: ResponseResult<Express.User | null> = {
         status: req.user ? StatusCodes.OK : StatusCodes.Forbidden,
