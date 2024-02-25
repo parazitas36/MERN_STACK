@@ -48,9 +48,9 @@ passport.serializeUser((user, done) => {
     })
 });
 
-passport.deserializeUser((user: Express.User | undefined, done) => {
+passport.deserializeUser((user, done) => {
     process.nextTick(function() {
         console.log('deserialize:', user);
-        return done(null, user);
+        return done(null, user as Express.User);
     });
 });

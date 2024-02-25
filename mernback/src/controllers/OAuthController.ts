@@ -28,15 +28,13 @@ router.get(AuthEndpoints.Logout, (req: Request, res: Response) => {
 
 router.get(
     AuthEndpoints.GoogleCallback,
-    passport.authenticate('google', {passReqToCallback: true, session: true}), 
+    passport.authenticate('google', {passReqToCallback: true}), 
     (req: Request, res: Response) => {
-        req.login(req.user!, (err) => {
-            res.redirect(process.env.CLIENT_URL as string);
-        })
+        res.redirect(process.env.CLIENT_URL as string);
     }
 );
 
-router.get(AuthEndpoints.Google, passport.authenticate('google', { session: true, scope: ['profile', 'email'] }));
+router.get(AuthEndpoints.Google, passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 
 export const OAuthController = router;
