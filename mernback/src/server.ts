@@ -11,10 +11,16 @@ import { StatusCodes } from './enums/StatusCodes';
 import passport from 'passport';
 import session from 'express-session';
 require('./utils/passport');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 dotenv.config();
 
 const app: Express = express();
+
+const sessionsStore = new MongoDBStore({
+  uri: process.env.MONGO_CONNECTION_STRING as string,
+  collection: 'sessions',
+});
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING as string)
   .then(() => {
@@ -49,6 +55,7 @@ app.use(
     httpOnly: process.env.HTTP_ONLY as string === 'true',
     sameSite: process.env.SAME_SITE as boolean | "lax" | "strict" | "none" | undefined,
   },
+  store: sessionsStore,
  })
 )
 
