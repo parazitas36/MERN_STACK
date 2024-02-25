@@ -81308,7 +81308,7 @@ const App = () => {
                 credentials: 'include',
             });
             const accountInfo = await response.json();
-            console.log(accountInfo);
+            alert(JSON.stringify(accountInfo));
             dispatch((0,_redux_actions_AccountActions__WEBPACK_IMPORTED_MODULE_5__.LoggedIn)(accountInfo));
         }
         catch (err) {
