@@ -60,7 +60,7 @@ app.use(
 )
 
 app.use(passport.initialize());
-app.use(passport.authenticate('session'));
+app.use(passport.session());
 
 app.use(cors(options));
 app.use(express.json());
