@@ -81306,6 +81306,11 @@ const App = () => {
             const url = `${"https://mern-api-zzah.onrender.com"}/auth/login`;
             const response = await fetch(url, {
                 credentials: 'include',
+                headers: {
+                    'Content-Tyoe': 'application/json',
+                    'Accept': 'application/json',
+                    'Cache': 'no-cache',
+                }
             });
             const accountInfo = await response.json();
             dispatch((0,_redux_actions_AccountActions__WEBPACK_IMPORTED_MODULE_5__.LoggedIn)(accountInfo));
