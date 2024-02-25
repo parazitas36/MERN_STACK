@@ -31,10 +31,10 @@ const options: cors.CorsOptions = {
 
 app.use(
  session({
-  secret: 'secret',
+  secret: process.env.SECRET as string,
   resave: false,
   saveUninitialized: false,
-  // cookie: {secure: true},
+  cookie: { secure: true },
  })
 )
 

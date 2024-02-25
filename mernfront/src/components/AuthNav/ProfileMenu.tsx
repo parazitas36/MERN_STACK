@@ -37,7 +37,15 @@ export const Profile = ({ accountState }: Props) => {
     return (
         <Box sx={BoxStyle}>
             <AccountCircleIcon sx={{ fontSize: 64, color: 'grey', marginTop: 2 }} />
-            <Typography variant='h6'>
+            <Typography
+                variant='h6'
+                sx={{
+                    maxWidth: 200,
+                    textAlign: "center",
+                    paddingX: 2,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                }}>
                 {`${accountState?.accountInfo?.name} ${accountState?.accountInfo?.surname}`}
             </Typography>
             <List>
@@ -46,9 +54,9 @@ export const Profile = ({ accountState }: Props) => {
                         <ListItemIcon>
                             <LocalMallIcon sx={{ fontSize: 30, color: 'common.black' }} />
                         </ListItemIcon>
-                        <ListItemText 
-                            primary='Orders' 
-                            sx={{ color: 'common.black' }} 
+                        <ListItemText
+                            primary='Orders'
+                            sx={{ color: 'common.black' }}
                             primaryTypographyProps={{
                                 fontWeight: '500'
                             }}
@@ -60,9 +68,9 @@ export const Profile = ({ accountState }: Props) => {
                         <ListItemIcon>
                             <LogoutIcon sx={{ fontSize: 30, color: 'error.dark' }} />
                         </ListItemIcon>
-                        <ListItemText 
-                            primary='Logout' 
-                            sx={{ color: 'error.dark' }} 
+                        <ListItemText
+                            primary='Logout'
+                            sx={{ color: 'error.dark' }}
                             primaryTypographyProps={{
                                 fontWeight: '500'
                             }}

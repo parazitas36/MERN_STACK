@@ -1,14 +1,13 @@
 import { useRef } from 'react';
+import { StatusCodes } from '../data/enums/StatusCodes';
 
 const MAX_REQUEST_DURATION_MS = process.env.MAX_REQUEST_DURATION_MS!;
-const ERROR_STATUS_CODE = process.env.ERROR_STATUS_CODE!;
 
 interface FetchProps {
 	endpoint: string;
 	headers?: HeadersInit;
 }
 
-//const API_URL = "https://mern-api-zzah.onrender.com";
 const API_URL = process.env.API_URL!;
 
 export function usePost<U, T>(props: FetchProps) {
@@ -37,7 +36,7 @@ export function usePost<U, T>(props: FetchProps) {
 		} catch (err) {
 			controller.abort();
 			error.current = err;
-			statusCode.current = Number(ERROR_STATUS_CODE);
+			statusCode.current = StatusCodes.ERROR;
 		} finally {
 			isLoading.current = false;
 		}

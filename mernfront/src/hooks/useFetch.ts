@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
+import { StatusCodes } from '../data/enums/StatusCodes';
 
 const MAX_REQUEST_DURATION_MS = Number(process.env.MAX_REQUEST_DURATION_MS!);
-const ERROR_STATUS_CODE = process.env.ERROR_STATUS_CODE!;
 
 interface FetchProps {
 	endpoint: string;
 	headers?: HeadersInit;
 }
 
-//const API_URL = "https://mern-api-zzah.onrender.com";
 const API_URL = process.env.API_URL!;
 
 export function useFetch<T>(props: FetchProps) {
@@ -40,7 +39,7 @@ export function useFetch<T>(props: FetchProps) {
 			} catch (error) {
                 controller.abort();
 				setError(error);
-                setStatusCode(Number(ERROR_STATUS_CODE));
+                setStatusCode(StatusCodes.ERROR);
 			} finally {
                 setIsLoading(false);
 			}
