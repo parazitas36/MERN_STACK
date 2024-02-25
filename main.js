@@ -81303,8 +81303,11 @@ const App = () => {
             return;
         }
         try {
-            const url = `${"https://mern-api-zzah.onrender.com"}/auth/login`;
+            const url = `${"http://localhost:8080"}/auth/login`;
             const response = await fetch(url, {
+                headers: {
+                    'Access-Control-Allow-Origin': "http://localhost:8080",
+                },
                 credentials: 'include',
             });
             const accountInfo = await response.json();
@@ -81499,7 +81502,7 @@ const Profile = ({ accountState }) => {
         if (!accountState?.accountInfo) {
             return;
         }
-        const url = `${"https://mern-api-zzah.onrender.com"}/auth/logout`;
+        const url = `${"http://localhost:8080"}/auth/logout`;
         const response = await fetch(url, {
             credentials: 'include',
         });
@@ -81510,7 +81513,13 @@ const Profile = ({ accountState }) => {
     };
     return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], { sx: BoxStyle },
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_AccountCircle__WEBPACK_IMPORTED_MODULE_7__["default"], { sx: { fontSize: 64, color: 'grey', marginTop: 2 } }),
-        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], { variant: 'h6' }, `${accountState?.accountInfo?.name} ${accountState?.accountInfo?.surname}`),
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], { variant: 'h6', sx: {
+                maxWidth: 200,
+                textAlign: "center",
+                paddingX: 2,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+            } }, `${accountState?.accountInfo?.name} ${accountState?.accountInfo?.surname}`),
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_9__["default"], null,
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_10__["default"], { disablePadding: true },
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_11__["default"], null,
@@ -82629,7 +82638,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   OAuthGoogle: () => (/* binding */ OAuthGoogle)
 /* harmony export */ });
 const OAuthGoogle = () => {
-    window.open(`${"https://mern-api-zzah.onrender.com"}/auth/google/callback`, "_self");
+    window.open(`${"http://localhost:8080"}/auth/google/callback`, "_self");
 };
 
 
@@ -82688,8 +82697,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const MAX_REQUEST_DURATION_MS = Number("5000");
-//const API_URL = "https://mern-api-zzah.onrender.com";
-const API_URL = "https://mern-api-zzah.onrender.com";
+const API_URL = "http://localhost:8080";
 function useFetch(props) {
     const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
     const [error, setError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
@@ -82745,8 +82753,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const MAX_REQUEST_DURATION_MS = "5000";
-//const API_URL = "https://mern-api-zzah.onrender.com";
-const API_URL = "https://mern-api-zzah.onrender.com";
+const API_URL = "http://localhost:8080";
 function usePost(props) {
     const data = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
     const error = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
