@@ -8,8 +8,6 @@ import { RequestsHandler } from "../utils/general/RequestsHandler";
 const router = Router();
 
 router.get(AuthEndpoints.Login, (req: Request, res: Response) => {
-    console.log(req);
-    console.log('cookies:', req.cookies)
     console.log('login user:', req.user);
     const responseData: ResponseResult<Express.User | null> = {
         status: req.user ? StatusCodes.OK : StatusCodes.Forbidden,
@@ -30,7 +28,7 @@ router.get(AuthEndpoints.Logout, (req: Request, res: Response) => {
 
 router.get(
     AuthEndpoints.GoogleCallback,
-    passport.authenticate('google', {passReqToCallback: true}), 
+    passport.authenticate('google', {passReqToCallback: true, session: true}), 
     (req: Request, res: Response) => {
         req.login(req.user!, (err) => {
             res.redirect(process.env.CLIENT_URL as string);
@@ -38,7 +36,7 @@ router.get(
     }
 );
 
-router.get(AuthEndpoints.Google, passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get(AuthEndpoints.Google, passport.authenticate('google', { session: true, scope: ['profile', 'email'] }));
 
 
 export const OAuthController = router;
