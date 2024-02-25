@@ -17,6 +17,7 @@ const options: StrategyOptionsWithRequest = {
 }
 
 const verifyCallback = async(req: express.Request, accessToken: string, refreshToken: string, profile: Profile, callback: VerifyCallback) => {
+    console.log('profile: ', profile)
     const userDto: IUserOAuthPostDto = {
         name: profile.name?.givenName ?? '',
         surname: profile.name?.familyName ?? '',
@@ -27,9 +28,13 @@ const verifyCallback = async(req: express.Request, accessToken: string, refreshT
         OAuthProvider: 'google'
     };
 
+    console.log('userdto: ', userDto)
+
     await RegisterOAuthUser(userDto);
     const foundUser = await FindUserByOAuthId(userDto.OAuthId!);
+    console.log('foundd user: ', foundUser);
     const dto = MapToIUserGetDto(foundUser);
+    console.log('dto: ', dto);
 
     return callback(null, dto ?? {});
 }
