@@ -81307,8 +81307,6 @@ const App = () => {
             const response = await fetch(url, {
                 credentials: 'include',
             });
-            console.log(response);
-            alert(JSON.stringify(response.body));
             const accountInfo = await response.json();
             dispatch((0,_redux_actions_AccountActions__WEBPACK_IMPORTED_MODULE_5__.LoggedIn)(accountInfo));
         }
