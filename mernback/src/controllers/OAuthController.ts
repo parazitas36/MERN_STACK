@@ -30,7 +30,9 @@ router.get(
     AuthEndpoints.GoogleCallback,
     passport.authenticate('google', {passReqToCallback: true}), 
     (req: Request, res: Response) => {
-        res.redirect(process.env.CLIENT_URL as string);
+        req.login(req.user ?? {}, (err) => {
+            res.redirect(process.env.CLIENT_URL as string);
+        })
     }
 );
 
