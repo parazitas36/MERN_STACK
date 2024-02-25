@@ -30,3 +30,17 @@ export function MapToIUserGetDto(user: IUser | null): IUserGetDto | null {
     surname: user.surname,
   };
 }
+
+export function MapToExpressUser(user: IUserGetDto | null): Express.User | undefined {
+  if (user === null) {
+    return undefined;
+  }
+
+  return {
+    email: user.email,
+    id: user.id,
+    name: user.name,
+    role: user.role,
+    surname: user.surname,
+  };
+}

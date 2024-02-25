@@ -10,10 +10,17 @@ import { OAuthController } from './controllers/OAuthController';
 import { StatusCodes } from './enums/StatusCodes';
 import passport from 'passport';
 import session from 'express-session';
+import { IUserGetDto } from './DTOs/user/IUserGetDto';
 require('./utils/passport');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 dotenv.config();
+
+declare global {
+  namespace Express {
+    interface User extends IUserGetDto {}
+  }
+}
 
 const app: Express = express();
 

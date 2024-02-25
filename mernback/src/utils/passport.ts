@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import { Role } from '../enums/Role';
 import { IUserOAuthPostDto } from '../DTOs/user/UserOAuthPostDto';
 import { FindUserByOAuthId, RegisterOAuthUser } from '../logic/UsersLogic'
-import { MapToIUserGetDto } from '../mappers/UserMappers';
+import { MapToExpressUser, MapToIUserGetDto } from '../mappers/UserMappers';
 import express from 'express';
 dotenv.config();
 
@@ -36,7 +36,7 @@ const verifyCallback = async(req: express.Request, accessToken: string, refreshT
     const dto = MapToIUserGetDto(foundUser);
     console.log('dto: ', dto);
 
-    return callback(null, dto ?? {});
+    return callback(null, MapToExpressUser(dto));
 }
 
 passport.use(new GoogleStrategy(options, verifyCallback));
@@ -46,7 +46,7 @@ passport.serializeUser((user, done) => {
     return done(null, user);
 });
 
-passport.deserializeUser((user, done) => {
+passport.deserializeUser((user: Express.User | undefined, done) => {
     console.log('deserialize:', user);
-    return done(null, user as Express.User);
+    return done(null, user);
 });
