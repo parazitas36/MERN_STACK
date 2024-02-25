@@ -8,6 +8,7 @@ import { RequestsHandler } from "../utils/general/RequestsHandler";
 const router = Router();
 
 router.get(AuthEndpoints.Login, (req: Request, res: Response) => {
+    console.log('login user:', req.user);
     const responseData: ResponseResult<Express.User | null> = {
         status: req.user ? StatusCodes.OK : StatusCodes.Forbidden,
         data: req.user ?? null,
