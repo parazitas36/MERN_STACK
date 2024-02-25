@@ -29,12 +29,19 @@ const options: cors.CorsOptions = {
   credentials: true,
 };
 
+app.set('trust proxy', process.env.PROXY as string === 'true' ? 1 : 0);
+
 app.use(
  session({
+  proxy: process.env.PROXY as string === 'true',
   secret: process.env.SECRET as string,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: process.env.SECURE_COOKIE === 'true' },
+  cookie: { 
+    secure: process.env.SECURE_COOKIE as string === 'true',
+    httpOnly: process.env.HTTP_ONLY as string === 'true',
+    sameSite: process.env.SAME_SITE as boolean | "lax" | "strict" | "none" | undefined,
+  },
  })
 )
 
