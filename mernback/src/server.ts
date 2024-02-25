@@ -34,7 +34,7 @@ app.use(
   secret: process.env.SECRET as string,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: true },
+  cookie: { secure: process.env.SECURE_COOKIE === 'true' },
  })
 )
 
