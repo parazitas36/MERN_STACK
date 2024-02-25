@@ -23,8 +23,15 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING as string)
   })
   .catch((err) => console.log(err));
 
+const whiteList = [
+  'https://parazitas36.github.io',
+  'https://parazitas36.github.io/',
+  'https://parazitas36.github.io/MERN_STACK',
+  'https://parazitas36.github.io/MERN_STACK/',
+]
+
 const options: cors.CorsOptions = {
-  origin: process.env.ALLOWED_ORIGINS as string,
+  origin: whiteList,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'PATCH'],
   credentials: true,
 };
